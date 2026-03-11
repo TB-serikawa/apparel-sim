@@ -17,6 +17,7 @@ import { UVSyncManager } from '@/lib/uv-sync'
 import { MaterialEditor } from '@/components/viewer/MaterialEditor'
 import { UVCanvas } from '@/components/viewer/UVCanvas'
 import { requestExport } from '@/lib/export'
+import { LivePresence } from '@/components/ui/LivePresence'
 
 // Lazy-load the 3D scene — no SSR
 const GarmentViewer = dynamic(
@@ -98,11 +99,16 @@ export default function DesignerPage({ params }: Props) {
           <span className="text-xs text-gray-600">/</span>
           <span className="text-sm font-semibold text-white">{config.name}</span>
         </div>
-        <div className="flex items-center gap-3 text-xs text-gray-500">
-          <span className="rounded-full bg-sky-500/10 px-3 py-1 text-sky-400">
+        <div className="flex items-center gap-5">
+          {/* 閲覧中ユーザー */}
+          <LivePresence max={4} showCount className="text-xs" />
+          <span className="text-xs text-gray-600">|</span>
+          <span className="rounded-full bg-sky-500/10 px-3 py-1 text-xs text-sky-400">
             {config.uvIslands.length} UV islands
           </span>
-          <span>{(config.textureSize / 1024).toFixed(0)}K テクスチャ</span>
+          <span className="text-xs text-gray-500">
+            {(config.textureSize / 1024).toFixed(0)}K テクスチャ
+          </span>
         </div>
       </header>
 
@@ -113,9 +119,9 @@ export default function DesignerPage({ params }: Props) {
           {uvSyncReady && <GarmentViewer uvSync={uvSyncRef.current} />}
           {!uvSyncReady && <ViewerSkeleton />}
 
-          {/* Placeholder notice — remove when real GLB files are added */}
-          <div className="pointer-events-none absolute bottom-4 left-4 rounded-lg border border-yellow-500/20 bg-yellow-500/5 px-3 py-2 text-xs text-yellow-400/70">
-            プレースホルダーメッシュ — .glb モデル追加後に置き換えてください
+          {/* Hint — replace mannequin with useGLTF once .glb files are ready */}
+          <div className="pointer-events-none absolute bottom-4 left-4 text-xs text-gray-700">
+            ドラッグで回転 · スクロールでズーム
           </div>
         </div>
 
