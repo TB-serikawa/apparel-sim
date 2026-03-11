@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js build output
+.next/
+out/
+
+# Production build
+/build
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 3D model files — store on S3 or Git LFS, not in the repo
+public/models/*.glb
+public/models/*.gltf
+# Allow the placeholder
+!public/models/.gitkeep
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Test coverage
+coverage/
